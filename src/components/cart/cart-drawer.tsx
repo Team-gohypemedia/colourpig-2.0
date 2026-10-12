@@ -291,27 +291,26 @@ export function CartDrawer() {
                   Taxes &amp; shipping calculated at checkout.
                 </p>
 
-                {/* Two buttons side-by-side */}
-                <div className="grid grid-cols-2 gap-3 pt-1">
-                  {/* Left: Continue Shopping (Light Platinum) */}
-                  <button
+                {/* Checkout Section in ColourPig Brand Theme */}
+                <div className="pt-2 flex flex-col items-center gap-3 w-full">
+                  {/* Primary Checkout Button in Obsidian Brand Color */}
+                  <Link
+                    href="/cart"
                     onClick={closeCart}
-                    className="w-full py-3.5 px-3 rounded-xl border border-ash/30 bg-platinum/30 hover:bg-platinum/60 text-obsidian text-[11px] font-mono font-bold tracking-widest uppercase flex items-center justify-center gap-1.5 transition-colors"
+                    className="w-full py-4 px-4 rounded-xl bg-obsidian hover:bg-black text-white text-[12px] sm:text-[13px] font-mono font-bold tracking-[0.18em] uppercase transition-all duration-200 shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
                   >
-                    <ArrowLeft className="w-3.5 h-3.5" />
-                    <span>CONTINUE</span>
-                  </button>
-
-                  {/* Right: Checkout in ColourPig Theme Color (Obsidian Black) */}
-                  <button
-                    onClick={() => {
-                      alert("Proceeding to secure checkout...");
-                    }}
-                    className="w-full py-3.5 px-3 rounded-xl bg-obsidian hover:bg-black text-white text-[11px] font-mono font-bold tracking-widest uppercase flex items-center justify-center gap-2 shadow-md transition-all active:scale-[0.99]"
-                  >
-                    <Lock className="w-3.5 h-3.5" />
+                    <Lock className="w-4 h-4 stroke-[2]" />
                     <span>CHECKOUT</span>
-                  </button>
+                  </Link>
+
+                  {/* Underlined View Shopping Cart Link opening full page cart */}
+                  <Link
+                    href="/cart"
+                    onClick={closeCart}
+                    className="text-[11px] sm:text-[12px] font-mono tracking-[0.16em] uppercase text-obsidian hover:text-black underline underline-offset-4 decoration-obsidian/40 hover:decoration-obsidian transition-colors font-semibold py-1 cursor-pointer"
+                  >
+                    VIEW SHOPPING CART
+                  </Link>
                 </div>
               </div>
             )}

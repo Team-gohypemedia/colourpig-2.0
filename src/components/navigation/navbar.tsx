@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ColourpigLogo } from "@/components/brand/logo";
 import { Search, User, Heart, ShoppingBag, Menu, X } from "lucide-react";
 import { useStore } from "@/context/store-context";
@@ -22,6 +23,7 @@ export function Navbar({
   onOpenMenu: propOpenMenu,
 }: NavbarProps) {
   const store = useStore();
+  const pathname = usePathname();
   const cartCount = propCartCount ?? store.cartCount;
   const wishlistCount = propWishlistCount ?? store.wishlistCount;
   const handleOpenCart = propOpenCart ?? store.openCart;
@@ -34,23 +36,29 @@ export function Navbar({
 
   // Stay transparent while hero section is visible; turn solid once it's fully scrolled past
   useEffect(() => {
+    if (pathname !== "/") {
+      setIsScrolled(true);
+      return;
+    }
+
     const hero = document.getElementById("hero-section");
-    if (!hero) return;
+    if (!hero) {
+      setIsScrolled(true);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // isIntersecting = hero is still (at least partially) in viewport → keep transparent
         setIsScrolled(!entry.isIntersecting);
       },
-      { threshold: 0 } // fires as soon as ANY pixel of hero leaves/enters viewport
+      { threshold: 0 }
     );
 
     observer.observe(hero);
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
-
-  const navBg = isScrolled
+  const navBg = isScrolled || pathname !== "/"
     ? "bg-obsidian/95 backdrop-blur-md border-b border-white/10 shadow-lg"
     : "bg-transparent border-b border-transparent";
 
@@ -114,10 +122,16 @@ export function Navbar({
                 Shades
               </Link>
               <Link
-                href="/#bestsellers"
+                href="/bestsellers"
                 className="hover:text-white transition-opacity duration-200"
               >
                 Bestsellers
+              </Link>
+              <Link
+                href="/collections"
+                className="hover:text-white transition-opacity duration-200"
+              >
+                Collection
               </Link>
             </nav>
           </div>
@@ -236,11 +250,18 @@ export function Navbar({
                 Shades
               </Link>
               <Link
-                href="#bestsellers"
+                href="/bestsellers"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block py-2 px-2 rounded-lg transition-colors"
               >
                 Bestsellers
+              </Link>
+              <Link
+                href="/collections"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 px-2 rounded-lg transition-colors"
+              >
+                Collection
               </Link>
               <Link
                 href="#shade-finder"

@@ -90,6 +90,7 @@ export function EcommFooter() {
               SHADES
             </span>
             <ul className="space-y-2.5 text-xs sm:text-[13px] text-ash/80">
+              <li><a href="/collections" className="text-white font-semibold hover:text-[#C9B07A] transition-colors"> Collection</a></li>
               <li><a href="#bestsellers" className="hover:text-white transition-colors">No.0/0 Clear Gloss</a></li>
               <li><a href="#bestsellers" className="hover:text-white transition-colors">No.1 Mineral Black</a></li>
               <li><a href="#bestsellers" className="hover:text-white transition-colors">No.3 Espresso Brown</a></li>
